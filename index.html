@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yiyakazah Nicodemus — Full Stack Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10151f;
+    --bg-raised:#161c29;
+    --line:#3d5a80;
+    --line-faint:rgba(61,90,128,0.35);
+    --ink:#edeef0;
+    --ink-dim:#9aa3b2;
+    --brass:#c9a227;
+    --blue:#6ea8c9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--line-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px);
+    background-size:40px 40px;
+    background-attachment:fixed;
+  }
+  a{color:var(--blue); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:600;}
+
+  /* Header / title block */
+  header{padding:64px 0 40px; border-bottom:1px solid var(--line-faint);}
+  .titleblock{
+    border:1px solid var(--line);
+    background:var(--bg-raised);
+    display:grid;
+    grid-template-columns:1fr auto;
+  }
+  .titleblock-main{padding:28px 28px 24px;}
+  .titleblock-main h1{font-size:clamp(1.7rem, 4vw, 2.4rem); line-height:1.15; margin-top:6px;}
+  .titleblock-main p{color:var(--ink-dim); margin-top:10px; max-width:46ch; font-size:0.98rem;}
+  .titleblock-meta{
+    border-left:1px solid var(--line);
+    display:flex; flex-direction:column;
+  }
+  .titleblock-meta div{
+    padding:10px 18px;
+    border-bottom:1px solid var(--line-faint);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    min-width:150px;
+  }
+  .titleblock-meta div:last-child{border-bottom:none;}
+  .titleblock-meta span{display:block; color:var(--ink-dim); font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:3px;}
+  nav{margin-top:20px; display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:0.8rem;}
+
+  section{padding:56px 0; border-bottom:1px solid var(--line-faint);}
+  section:last-of-type{border-bottom:none;}
+  .section-title{display:flex; align-items:baseline; gap:14px; margin-bottom:28px;}
+  .section-title h2{font-size:1.4rem;}
+  .section-title .eyebrow{white-space:nowrap;}
+  .section-title::after{content:""; flex:1; height:1px; background:var(--line-faint);}
+
+  /* About */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .about-grid p{color:var(--ink-dim); font-size:0.98rem;}
+  .skills{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .skills span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    color:var(--blue);
+  }
+
+  /* Projects as drawing sheets */
+  .sheet{
+    border:1px solid var(--line);
+    background:var(--bg-raised);
+    margin-bottom:20px;
+    overflow:hidden;
+    transition:border-color .2s ease;
+  }
+  .sheet:hover{border-color:var(--brass);}
+  .sheet-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 22px; border-bottom:1px solid var(--line-faint);
+  }
+  .sheet-head h3{font-size:1.1rem;}
+  .sheet-num{font-family:'IBM Plex Mono', monospace; color:var(--brass); font-size:0.8rem;}
+  .sheet-body{padding:18px 22px 22px;}
+  .sheet-body p{color:var(--ink-dim); font-size:0.95rem; margin-bottom:14px;}
+  .spec-table{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    border-top:1px solid var(--line-faint);
+    margin-top:8px;
+  }
+  .spec-table div{padding:10px 0 0; font-size:0.78rem;}
+  .spec-table span{display:block; font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:3px;}
+  .sheet-links{margin-top:14px; display:flex; gap:16px; font-family:'IBM Plex Mono', monospace; font-size:0.8rem;}
+  .placeholder{opacity:0.55;}
+  .placeholder .sheet-body p{font-style:italic;}
+
+  /* Contact */
+  .contact-grid{display:flex; flex-wrap:wrap; gap:14px;}
+  .contact-card{
+    border:1px solid var(--line);
+    padding:16px 20px;
+    flex:1; min-width:180px;
+  }
+  .contact-card span{display:block; font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--brass); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;}
+
+  footer{padding:32px 0 60px; color:var(--ink-dim); font-family:'IBM Plex Mono', monospace; font-size:0.75rem;}
+
+  @media (max-width:640px){
+    .titleblock{grid-template-columns:1fr;}
+    .titleblock-meta{border-left:none; border-top:1px solid var(--line); flex-direction:row; flex-wrap:wrap;}
+    .titleblock-meta div{flex:1; min-width:130px;}
+    .about-grid{grid-template-columns:1fr;}
+    .spec-table{grid-template-columns:1fr 1fr;}
+    nav{flex-wrap:wrap; gap:14px;}
+  }
+
+  :focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} * {transition:none !important;} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="titleblock">
+      <div class="titleblock-main">
+        <div class="eyebrow">Portfolio — Sheet 01 of 01</div>
+        <h1>Yiyakazah Nicodemus</h1>
+        <p>Full Stack Software Engineering Trainee working in Go and Python. Trained first as a civil engineer — I used to build things that hold weight; now I build systems that hold logic.</p>
+        <nav>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="titleblock-meta">
+        <div><span>Role</span>Full Stack Trainee</div>
+        <div><span>Stack</span>Go / Python</div>
+        <div><span>Based</span>Nigeria</div>
+        <div><span>Status</span>Open to work</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="work">
+    <div class="section-title"><span class="eyebrow">Drawing Index</span><h2>Selected Work</h2></div>
+
+    <div class="sheet">
+      <div class="sheet-head">
+        <h3>ASCII Banner Server</h3>
+        <span class="sheet-num mono">FIG. 01</span>
+      </div>
+      <div class="sheet-body">
+        <p>A Go web server that renders ASCII banner art over HTTP. Built the routing, file parsing, and handler logic from scratch, with a full test suite for the banner-loading function and a collaborative Git workflow using feature branches and pull requests.</p>
+        <div class="spec-table">
+          <div><span>Stack</span>Go, net/http</div>
+          <div><span>Focus</span>Routing & middleware</div>
+          <div><span>Status</span>Shipped</div>
+        </div>
+        <div class="sheet-links">
+          <a href="https://github.com/yini-19" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet placeholder">
+      <div class="sheet-head">
+        <h3>Project Two</h3>
+        <span class="sheet-num mono">FIG. 02</span>
+      </div>
+      <div class="sheet-body">
+        <p>Swap this sheet for your next build — what it does, the problem it solved, one hard decision you made.</p>
+        <div class="spec-table">
+          <div><span>Stack</span>—</div>
+          <div><span>Focus</span>—</div>
+          <div><span>Status</span>In progress</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet placeholder">
+      <div class="sheet-head">
+        <h3>Project Three</h3>
+        <span class="sheet-num mono">FIG. 03</span>
+      </div>
+      <div class="sheet-body">
+        <p>A third sheet, reserved. Three strong projects beat five thin ones.</p>
+        <div class="spec-table">
+          <div><span>Stack</span>—</div>
+          <div><span>Focus</span>—</div>
+          <div><span>Status</span>Planned</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title"><span class="eyebrow">Spec Sheet</span><h2>About</h2></div>
+    <div class="about-grid">
+      <p>Started in civil engineering — reading blueprints, running site surveys, checking structural compliance. Since May 2025, training full stack at Learn2Earn Ltd, writing Go and Python, and applying the same instinct for load, tolerance, and failure modes to code instead of concrete.</p>
+      <div>
+        <p style="margin-bottom:8px;">Currently working with:</p>
+        <div class="skills">
+          <span>Go</span><span>Python</span><span>net/http</span><span>REST APIs</span><span>Git & GitHub</span><span>Testing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title"><span class="eyebrow">Contact Block</span><h2>Get in touch</h2></div>
+    <div class="contact-grid">
+      <div class="contact-card"><span>Email</span><a href="mailto:yiyakazahn@gmail.com">yiyakazahn@gmail.com</a></div>
+      <div class="contact-card"><span>GitHub</span><a href="https://github.com/yini-19" target="_blank" rel="noopener">github.com/yini-19</a></div>
+      <div class="contact-card"><span>LinkedIn</span><a href="https://ng.linkedin.com/in/yiyakazah-nicodemus-279968324" target="_blank" rel="noopener">LinkedIn Profile</a></div>
+    </div>
+  </section>
+
+  <footer>Sheet issued 2026 · Rev. 01</footer>
+</div>
+
+</body>
+</html>
